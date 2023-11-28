@@ -1,6 +1,10 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+// 这里的@符号仅仅是进行联想提示
+import HelloWorld from '@/components/HelloWorld.vue'
+
+// elementPlus样式
+
 </script>
 
 <template>
@@ -18,6 +22,16 @@ import HelloWorld from './components/HelloWorld.vue'
   </header>
 
   <RouterView />
+<!-- 测试elementPlus组件是否可用 -->
+<el-row class="mb-4">
+    <el-button>Default</el-button>
+    <el-button type="primary">Primary</el-button>
+    <el-button type="success">Success</el-button>
+    <el-button type="info">Info</el-button>
+    <el-button type="warning">Warning</el-button>
+    <el-button type="danger">Danger</el-button>
+  </el-row>
+
 </template>
 
 <style scoped>
