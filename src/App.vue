@@ -1,7 +1,14 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+// import {ref} from 'vue'
 // 这里的@符号仅仅是进行联想提示
 import HelloWorld from '@/components/HelloWorld.vue'
+import {getCategoryAPI} from '@/apis/testAPI'
+
+getCategoryAPI().then((res)=>{
+  console.log(res.result);
+})
+
 
 // elementPlus样式
 
