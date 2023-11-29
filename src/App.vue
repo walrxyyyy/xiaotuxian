@@ -1,11 +1,11 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 // import {ref} from 'vue'
 // 这里的@符号仅仅是进行联想提示
-import HelloWorld from '@/components/HelloWorld.vue'
-import {getCategoryAPI} from '@/apis/testAPI'
 
-getCategoryAPI().then((res)=>{
+import { getCategoryAPI } from '@/apis/testAPI'
+
+getCategoryAPI().then((res) => {
   console.log(res.result);
 })
 
@@ -15,30 +15,18 @@ getCategoryAPI().then((res)=>{
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
+  <!-- 一级路由出口组件 -->
   <RouterView />
-<!-- 测试elementPlus组件是否可用 -->
-<el-row class="mb-4">
-    <el-button>Default</el-button>
-    <el-button type="primary">Primary</el-button>
-    <el-button type="success">Success</el-button>
-    <el-button type="info">Info</el-button>
-    <el-button type="warning">Warning</el-button>
-    <el-button type="danger">Danger</el-button>
-  </el-row>
-
+  <!-- <RouterLink to="/">首页</RouterLink> -->
+  <!-- 测试elementPlus组件是否可用 -->
+  <!-- <el-row class="mb-4">
+        <el-button>Default</el-button>
+        <el-button type="primary">Primary</el-button>
+        <el-button type="success">Success</el-button>
+        <el-button type="info">Info</el-button>
+        <el-button type="warning">Warning</el-button>
+        <el-button type="danger">Danger</el-button>
+      </el-row> -->
 </template>
 
 <style scoped>
