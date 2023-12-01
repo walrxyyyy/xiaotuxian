@@ -1,5 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import {getCategoryAPI} from '@/apis/layout'
 
 export const useCounterStore = defineStore('counter', () => {
   const count = ref(0)
@@ -7,6 +8,10 @@ export const useCounterStore = defineStore('counter', () => {
   function increment() {
     count.value++
   }
-
-  return { count, doubleCount, increment }
+  const list=ref([])
+  const getCategory  =async ()=>{
+    const res =await  getCategoryAPI()
+    list.value = res.result
+  }
+  return { count, doubleCount, increment,getCategory,list }
 })

@@ -1,14 +1,16 @@
 <script setup>
-import {getCategoryAPI} from '@/apis/layout'
-import {ref, onMounted} from 'vue'
+// import {getCategoryAPI} from '@/apis/layout'
+
+// import {ref} from 'vue'
+// import {toRefs} from "vue";
 
 // 创建响应式数据list
-const list = ref([])
+// const list = ref([])
 // 再次封装接口方法，将赋值等业务逻辑放到getCategory中，onMounted方法中只负责调用
-const getCategory = async () => {
-    const res = await getCategoryAPI()
-    list.value = res.result
-}
+// const getCategory = async () => {
+//     const res = await getCategoryAPI()
+//     list.value = res.result
+// }
 // const getCategory = ()=>{
 //     setTimeout(async ()=>{
 //         const res =await getCategoryAPI()
@@ -16,11 +18,14 @@ const getCategory = async () => {
 //         },0)
 //
 // }
+import {useCounterStore} from '@/stores/counter'
 
+const counter = useCounterStore()
 
-onMounted(() => {
-    getCategory()
-})
+// const {list:reactiveList}=toRefs({list})
+// export {reactiveList}
+// eslint-disable-next-line vue/no-export-in-script-setup
+// export {list}
 </script>
 
 <template>
@@ -30,7 +35,10 @@ onMounted(() => {
                 <RouterLink to="/">小兔鲜</RouterLink>
             </h1>
             <ul class="app-header-nav">
-                <li class="home" v-for="data in list" :key="data.id">
+                <li class="home">
+                    <RouterLink to="/">首页</RouterLink>
+                </li>
+                <li v-for="data in counter.list" :key="data.id">
                     <RouterLink to="/">{{ data.name }}</RouterLink>
                 </li>
 
