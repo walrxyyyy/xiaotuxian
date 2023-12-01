@@ -5,13 +5,13 @@
         <div class="container">
           <dl>
             <dt>客户服务</dt>
-            <dd><i class="icon-zaixiankefu"></i>在线客服</dd>
-            <dd><i class="icon-wentifankui"></i>问题反馈</dd>
+            <dd><i class="iconfont icon-zaixiankefu"></i>在线客服</dd>
+            <dd><i class="iconfont icon-icon-test"></i>问题反馈</dd>
           </dl>
           <dl>
             <dt>关注我们</dt>
             <dd><i class="iconfont icon-gongzhonghao"></i>公众号</dd>
-            <dd><i class="icon-xinlangweibo"></i>微博</dd>
+            <dd><i class="iconfont icon-xinlangweibo"></i>微博</dd>
           </dl>
           <dl>
             <dt>下载APP</dt>
