@@ -1,29 +1,49 @@
 <script setup>
+import {getCategoryAPI} from '@/apis/layout'
+import {ref, onMounted} from 'vue'
 
+// 创建响应式数据list
+const list = ref([])
+// 再次封装接口方法，将赋值等业务逻辑放到getCategory中，onMounted方法中只负责调用
+const getCategory = async () => {
+    const res = await getCategoryAPI()
+    list.value = res.result
+}
+// const getCategory = ()=>{
+//     setTimeout(async ()=>{
+//         const res =await getCategoryAPI()
+//         list.value=res.result
+//         },0)
+//
+// }
+
+
+onMounted(() => {
+    getCategory()
+})
 </script>
 
 <template>
-  <header class='app-header'>
-    <div class="container">
-      <h1 class="logo">
-        <RouterLink to="/">小兔鲜</RouterLink>
-      </h1>
-      <ul class="app-header-nav">
-        <li class="home">
-          <RouterLink to="/">首页</RouterLink>
-        </li>
-        <li> <RouterLink to="/">居家</RouterLink> </li>
-        <li> <RouterLink to="/">美食</RouterLink> </li>
-        <li> <RouterLink to="/">服饰</RouterLink> </li>
-      </ul>
-      <div class="search">
-        <i class="iconfont icon-sousuo1"></i>
-        <input type="text" placeholder="搜一搜">
-      </div>
-      <!-- 头部购物车 -->
-      
-    </div>
-  </header>
+    <header class='app-header'>
+        <div class="container">
+            <h1 class="logo">
+                <RouterLink to="/">小兔鲜</RouterLink>
+            </h1>
+            <ul class="app-header-nav">
+                <li class="home" v-for="data in list" :key="data.id">
+                    <RouterLink to="/">{{ data.name }}</RouterLink>
+                </li>
+
+
+            </ul>
+            <div class="search">
+                <i class="iconfont icon-sousuo1"></i>
+                <input type="text" placeholder="搜一搜">
+            </div>
+            <!-- 头部购物车 -->
+
+        </div>
+    </header>
 </template>
 
 
@@ -54,24 +74,24 @@
     padding-left: 40px;
     position: relative;
     z-index: 998;
-  
+
     li {
       margin-right: 40px;
       width: 38px;
       text-align: center;
-  
+
       a {
         font-size: 16px;
         line-height: 32px;
         height: 32px;
         display: inline-block;
-  
+
         &:hover {
           color: $xtxColor;
           border-bottom: 1px solid $xtxColor;
         }
       }
-  
+
       .active {
         color: $xtxColor;
         border-bottom: 1px solid $xtxColor;
