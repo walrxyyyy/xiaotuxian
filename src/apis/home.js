@@ -21,9 +21,17 @@ const getHotAPI=()=>{
         url:'home/hot'
     })
 }
+// 获取所有商品数据接口
+const getGoodsAPI=()=>{
+    return httpInstance({
+        method:'get',
+        url:'home/goods'
+    })
+}
 // 导出方法
 export {
     getBannerAPI,
     getNewAPI,
-    getHotAPI
+    getHotAPI,
+    getGoodsAPI
 }
