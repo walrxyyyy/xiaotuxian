@@ -1,5 +1,5 @@
 <script setup>
-import {getBannerAPI} from '@/apis/getBanner'
+import {getBannerAPI} from '@/apis/home'
 import {onMounted, ref} from 'vue'
 
 const bannerList = ref([])
@@ -45,4 +45,4 @@ onMounted(()=>{
         height: 500px;
     }
 }
-</style>
+</style>@/apis/home
