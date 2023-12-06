@@ -20,16 +20,19 @@ const router = createRouter({
         {
           // path为空代表默认进入该页面
           path:'',
+          name:'home',
           component:Home
         },
         {
-          path:'category',
+          path:'category/:id',
+          name:'category',
           component:Category
         }
       ]
     },
     {
       path: '/login',
+      name:'login',
       component: Login
     }
   ]

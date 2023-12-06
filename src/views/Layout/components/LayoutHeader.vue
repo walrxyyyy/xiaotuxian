@@ -39,7 +39,7 @@ const counter = useCounterStore()
                     <RouterLink to="/">首页</RouterLink>
                 </li>
                 <li v-for="data in counter.list" :key="data.id">
-                    <RouterLink to="/">{{ data.name }}</RouterLink>
+                    <RouterLink :to="`/category/${data.id}`">{{ data.name }}</RouterLink>
                 </li>
 
 
