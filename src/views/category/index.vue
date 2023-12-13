@@ -1,19 +1,28 @@
 <script setup>
-import {getTopCategoryAPI} from '@/apis/category'
-import { onMounted,ref } from 'vue';
-import {useRoute} from 'vue-router'
+import { getTopCategoryAPI } from '@/apis/category'
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router'
+import { getBannerAPI } from '@/apis/home'
 
 const categoryData = ref({})
 const route = useRoute()
-const getCategory =async (id)=>{
+const getCategory = async (id) => {
   // 如何在setup中获取路由参数 useRoute() -> route 等价于this.$route
-  const res =await getTopCategoryAPI(id)
+  const res = await getTopCategoryAPI(id)
   categoryData.value = res.result
 }
+
+// 轮播图方法
+const bannerList = ref([])
+const getBanner=async ()=>{
+    const res =await getBannerAPI()
+    bannerList.value=res.result
+}
 // 这样的方法有一个问题，每次点击必须刷新才能更新页面
-onMounted(()=>{
+onMounted(() => {
   getCategory(route.params.id)
-  console.log(categoryData.value);
+  // console.log(categoryData.value);
+  getBanner()
 })
 </script>
 
@@ -24,11 +33,21 @@ onMounted(()=>{
       <div class="bread-container">
         <el-breadcrumb separator=">">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item>{{categoryData.name}}</el-breadcrumb-item>
+          <el-breadcrumb-item>{{ categoryData.name }}</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
     </div>
   </div>
+
+  <div class="home-banner">
+        <!-- elementPlus 中的轮播图组件 -->
+        <el-carousel height="500px">
+            <el-carousel-item v-for="item in bannerList" :key="item.id">
+                <img :src="item.imgUrl"
+                    alt="">
+            </el-carousel-item>
+        </el-carousel>
+    </div>
 </template>
 
 
@@ -109,5 +128,20 @@ onMounted(()=>{
   .bread-container {
     padding: 25px 0;
   }
+}
+// 轮播图样式
+.home-banner {
+    width: 1240px;
+    height: 500px;
+    // position: absolute;
+    // left: 0;
+    // top: 0;
+    // z-index: 98;
+    margin: 0 auto;
+
+    img {
+        width: 100%;
+        height: 500px;
+    }
 }
 </style>

@@ -45,4 +45,4 @@ onMounted(()=>{
         height: 500px;
     }
 }
-</style>@/apis/home
+</style>
