@@ -1,12 +1,15 @@
 <script setup>
 import { getTopCategoryAPI } from '@/apis/category'
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import { useRoute } from 'vue-router'
 import { getBannerAPI } from '@/apis/home'
+import GoodsItem from '../home/components/GoodsItem.vue';
+import {onMounted} from 'vue'
+import { onBeforeRouteUpdate } from 'vue-router'
 
 const categoryData = ref({})
 const route = useRoute()
-const getCategory = async (id) => {
+const getCategory = async (id = route.params.id) => {
   // 如何在setup中获取路由参数 useRoute() -> route 等价于this.$route
   const res = await getTopCategoryAPI(id)
   categoryData.value = res.result
@@ -14,14 +17,18 @@ const getCategory = async (id) => {
 
 // 轮播图方法
 const bannerList = ref([])
-const getBanner=async ()=>{
-    const res =await getBannerAPI()
-    bannerList.value=res.result
+const getBanner = async () => {
+  const res = await getBannerAPI()
+  bannerList.value = res.result
 }
-// 这样的方法有一个问题，每次点击必须刷新才能更新页面
-onMounted(() => {
-  getCategory(route.params.id)
+// 使用onMounted这样的方法有一个问题，每次点击必须刷新才能更新页面
+// 
+onBeforeRouteUpdate((to) => {
+  getCategory(to.params.id)
   // console.log(categoryData.value);
+  
+})
+onMounted(()=>{
   getBanner()
 })
 </script>
@@ -36,18 +43,36 @@ onMounted(() => {
           <el-breadcrumb-item>{{ categoryData.name }}</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
-    </div>
-  </div>
-
-  <div class="home-banner">
+      <div class="home-banner">
         <!-- elementPlus 中的轮播图组件 -->
         <el-carousel height="500px">
-            <el-carousel-item v-for="item in bannerList" :key="item.id">
-                <img :src="item.imgUrl"
-                    alt="">
-            </el-carousel-item>
+          <el-carousel-item v-for="item in bannerList" :key="item.id">
+            <img :src="item.imgUrl" alt="">
+          </el-carousel-item>
         </el-carousel>
+      </div>
+
+      <div class="sub-list">
+        <h3>全部分类</h3>
+        <ul>
+          <li v-for="i in categoryData.children" :key="i.id">
+            <RouterLink to="/">
+              <img :src="i.picture" />
+              <p>{{ i.name }}</p>
+            </RouterLink>
+          </li>
+        </ul>
+      </div>
+      <div class="ref-goods" v-for="item in categoryData.children" :key="item.id">
+        <div class="head">
+          <h3>- {{ item.name }}-</h3>
+        </div>
+        <div class="body">
+          <GoodsItem v-for="good in item.goods" :good="good" :key="good.id" />
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 
@@ -129,19 +154,20 @@ onMounted(() => {
     padding: 25px 0;
   }
 }
+
 // 轮播图样式
 .home-banner {
-    width: 1240px;
-    height: 500px;
-    // position: absolute;
-    // left: 0;
-    // top: 0;
-    // z-index: 98;
-    margin: 0 auto;
+  width: 1240px;
+  height: 500px;
+  // position: absolute;
+  // left: 0;
+  // top: 0;
+  // z-index: 98;
+  margin: 0 auto;
 
-    img {
-        width: 100%;
-        height: 500px;
-    }
+  img {
+    width: 100%;
+    height: 500px;
+  }
 }
 </style>
