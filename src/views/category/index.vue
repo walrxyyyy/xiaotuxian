@@ -1,36 +1,11 @@
 <script setup>
-import { getTopCategoryAPI } from '@/apis/category'
-import { ref } from 'vue';
-import { useRoute } from 'vue-router'
-import { getBannerAPI } from '@/apis/home'
 import GoodsItem from '../home/components/GoodsItem.vue';
-import {onMounted} from 'vue'
-import { onBeforeRouteUpdate } from 'vue-router'
+import { useBanner } from "@/views/category/composables/useBanner";
+import { useCategory } from "@/views/category/composables/useCategory";
 
-const categoryData = ref({})
-const route = useRoute()
-const getCategory = async (id = route.params.id) => {
-  // 如何在setup中获取路由参数 useRoute() -> route 等价于this.$route
-  const res = await getTopCategoryAPI(id)
-  categoryData.value = res.result
-}
+const { categoryData } = useCategory()
+const { bannerList } = useBanner()
 
-// 轮播图方法
-const bannerList = ref([])
-const getBanner = async () => {
-  const res = await getBannerAPI()
-  bannerList.value = res.result
-}
-// 使用onMounted这样的方法有一个问题，每次点击必须刷新才能更新页面
-// 
-onBeforeRouteUpdate((to) => {
-  getCategory(to.params.id)
-  // console.log(categoryData.value);
-  
-})
-onMounted(()=>{
-  getBanner()
-})
 </script>
 
 <template>
