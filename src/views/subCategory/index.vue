@@ -28,10 +28,24 @@ const getGoodsList = async () => {
 }
 
 // tab切换回调 按照新的排序方式重新加载商品
-const tabChange=()=>{
-  reqData.value.page=1
+const tabChange = () => {
+  reqData.value.page = 1
   // console.log('tab切换了',reqData.value.sortField);
   getGoodsList()
+}
+// 无限加载逻辑
+const disabled = ref(false)
+const load = async () => {
+  // console.log('加载更多数据',reqData.value.page,res.result.items.length);
+  // 获取下一页的数据
+  reqData.value.page++
+  const res = await getSubCategoryAPI(reqData.value)
+  // 进行数据拼接
+  goodsList.value = [...goodsList.value, ...res.result.items]
+  // 加载完毕  停止监听
+  if (res.result.items.length === 0) {
+    disabled.value = true
+  }
 }
 
 onMounted(() => {
@@ -57,7 +71,7 @@ onMounted(() => {
         <el-tab-pane label="最高人气" name="orderNum"></el-tab-pane>
         <el-tab-pane label="评论最多" name="evaluateNum"></el-tab-pane>
       </el-tabs>
-      <div class="body">
+      <div class="body" v-infinite-scroll="load">
         <!-- 商品列表-->
         <GoodsItem v-for="item in goodsList" :good="item" :key="item.id"></GoodsItem>
       </div>
