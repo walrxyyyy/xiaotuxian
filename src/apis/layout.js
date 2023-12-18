@@ -1,4 +1,4 @@
-import {httpInstance} from '@/utils/http'
+import { httpInstance } from '@/utils/http'
 
 const getCategoryAPI = () => {
     return httpInstance({
@@ -7,4 +7,6 @@ const getCategoryAPI = () => {
     })
 }
 
-export {getCategoryAPI}
+export {
+    getCategoryAPI
+}
