@@ -7,6 +7,7 @@ import Login from '@/views/Login/index.vue'
 import Home from '@/views/home/index.vue'
 import Category from '@/views/category/index.vue'
 import subCategory from '@/views/subCategory/index.vue'
+import Detail from '@/views/detail/index.vue'
 
 // 创建router实例对象
 const router = createRouter({
@@ -33,6 +34,11 @@ const router = createRouter({
           path: 'category/sub/:id',
           name: 'subCategory',
           component: subCategory
+        },
+        {
+          path:'detail/:id',
+          name:'detail',
+          component:Detail
         }
       ]
     },
