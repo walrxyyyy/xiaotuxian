@@ -6,6 +6,7 @@ import Layout from '@/views/Layout/index.vue'
 import Login from '@/views/Login/index.vue'
 import Home from '@/views/home/index.vue'
 import Category from '@/views/category/index.vue'
+import subCategory from '@/views/subCategory/index.vue'
 
 // 创建router实例对象
 const router = createRouter({
@@ -16,23 +17,28 @@ const router = createRouter({
     {
       path: '/',
       component: Layout,
-      children:[
+      children: [
         {
           // path为空代表默认进入该页面
-          path:'',
-          name:'home',
-          component:Home
+          path: '',
+          name: 'home',
+          component: Home
         },
         {
-          path:'category/:id',
-          name:'category',
-          component:Category
+          path: 'category/:id',
+          name: 'category',
+          component: Category
+        },
+        {
+          path: 'category/sub/:id',
+          name: 'subCategory',
+          component: subCategory
         }
       ]
     },
     {
       path: '/login',
-      name:'login',
+      name: 'login',
       component: Login
     }
   ]
