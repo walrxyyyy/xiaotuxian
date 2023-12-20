@@ -1,9 +1,10 @@
 <script setup>
+import DetailHot from '@/views/detail/components/detailHot.vue'
+import ImgView from '@/components/ImgView/index.vue'
 import { getDetail } from '@/apis/detail'
 import { ref } from 'vue'
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router'
-import DetailHot from '@/views/detail/components/detailHot.vue'
 
 const goods = ref({})
 const route = useRoute()
@@ -39,27 +40,27 @@ onMounted(() => {
                     <div class="goods-info">
                         <div class="media">
                             <!-- 图片预览区 -->
-
+                            <ImgView></ImgView>
                             <!-- 统计数量 -->
                             <ul class="goods-sales">
                                 <li>
                                     <p>销量人气</p>
-                                    <p> {{ goods.salesCount }}+ </p>
+                                    <p> {{ goods.salesCount }}</p>
                                     <p><i class="iconfont icon-task-filling"></i>销量人气</p>
                                 </li>
                                 <li>
                                     <p>商品评价</p>
-                                    <p>{{ goods.commentCount }}+</p>
+                                    <p>{{ goods.commentCount }}</p>
                                     <p><i class="iconfont icon-comment-filling"></i>查看评价</p>
                                 </li>
                                 <li>
                                     <p>收藏人气</p>
-                                    <p>{{ goods.collectCount }}+</p>
+                                    <p>{{ goods.collectCount }}</p>
                                     <p><i class="iconfont icon-favorite-filling"></i>收藏商品</p>
                                 </li>
                                 <li>
                                     <p>品牌信息</p>
-                                    <p>{{ goods.brand.name }}+</p>
+                                    <p>{{ goods.brand.name }}</p>
                                     <p><i class="iconfont icon-dynamic-filling"></i>品牌主页</p>
                                 </li>
                             </ul>

@@ -40,7 +40,7 @@ const getHotList = async () => {
 
 onMounted(() => {
     getHotList()
-    console.log(goodsList);
+    // console.log(goodsList);
 })
 </script>
 
