@@ -1,5 +1,7 @@
 // 定义懒加载插件
 import { useIntersectionObserver } from '@vueuse/core'
+import ImgView from '@/components/ImgView/index.vue'
+import Sku from '@/components/xtxSKU/index.vue'
 
 const lazyPlugin = {
   install(app) {
@@ -26,5 +28,18 @@ const lazyPlugin = {
     })
   }
 }
+// 把components中的所组件都进行全局化注册
+// 通过插件的方式
+const componentPlugin = {
+  install(app) {
+    // app.component('组件名字'，组件配置对象)
+    app.component('ImgView', ImgView)
+    app.component('Sku', Sku)
+  }
+}
 
-export { lazyPlugin }
+
+export {
+  lazyPlugin,
+  componentPlugin
+}

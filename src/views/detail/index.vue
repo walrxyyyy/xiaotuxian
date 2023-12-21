@@ -1,6 +1,6 @@
 <script setup>
 import DetailHot from '@/views/detail/components/detailHot.vue'
-import ImgView from '@/components/ImgView/index.vue'
+// import ImgView from '@/components/ImgView/index.vue'
 import { getDetail } from '@/apis/detail'
 import { ref } from 'vue'
 import { onMounted } from 'vue';
@@ -89,7 +89,7 @@ onMounted(() => {
                                 </dl>
                             </div>
                             <!-- sku组件 -->
-
+                            <Sku></Sku>
                             <!-- 数据组件 -->
 
                             <!-- 按钮组件 -->
