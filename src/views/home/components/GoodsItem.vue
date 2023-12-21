@@ -6,6 +6,7 @@ defineProps({
         default:()=>{}
     }
   })
+
 </script>
 
 <template>
