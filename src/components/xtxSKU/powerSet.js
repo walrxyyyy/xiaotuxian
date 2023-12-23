@@ -1,4 +1,4 @@
-const powerSet = (originalSet) => {
+const bwPowerSet = (originalSet) => {
     const subSets = []
 
     // We will have 2^n possible combinations (where n is a length of original set).
@@ -23,9 +23,10 @@ const powerSet = (originalSet) => {
         // Add current subset to the list of all subsets.
         subSets.push(subSet)
     }
+
     return subSets
 }
 
 export {
-    powerSet
+    bwPowerSet
 }
