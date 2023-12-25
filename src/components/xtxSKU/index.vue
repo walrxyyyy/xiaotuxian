@@ -15,7 +15,7 @@ const getGoods = async () => {
     goods.value = res.data.result
     pathMap = getPathMap(goods.value)
     // 初始化更新按钮状态
-    
+    initDisabledState(goods.value.specs, pathMap)
 }
 // console.log('这是pathMap',pathMap);
 // 切换选中状态
@@ -59,7 +59,16 @@ const getPathMap = (goods) => {
     })
     return pathMap
 }
-
+// 初始化禁用状态
+const initDisabledState = (specs, pathMap) => {
+    // 约定每一个按钮的状态由自身的disabled进行控制
+    specs.forEach(item => {
+        item.value.forEach(val => {
+            // 路径字段中查找是否有数据  有就可以点击  没有则禁用
+            val.disabled = !pathMap[val.name]
+        })
+    })
+}
 onMounted(() => getGoods())
 
 </script>
@@ -71,10 +80,11 @@ onMounted(() => getGoods())
             <dd>
                 <template v-for="val in item.values" :key="val.name">
                     <!-- 图片类型规格 -->
-                    <img v-if="val.picture" :src="val.picture" :title="val.name" :class="{ selected: val.selected }"
-                        @click="changeSku(item, val)">
+                    <img v-if="val.picture" :src="val.picture" :title="val.name"
+                        :class="{ selected: val.selected, disabled: val.disabled }" @click="changeSku(item, val)">
                     <!-- 文字类型规格 -->
-                    <span v-else :class="{ selected: val.selected }" @click="changeSku(item, val)">{{ val.name }}</span>
+                    <span v-else :class="{ selected: val.selected, disabled: val.disabled }" @click="changeSku(item, val)">{{
+                        val.name }}</span>
                 </template>
             </dd>
         </dl>
