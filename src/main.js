@@ -10,7 +10,7 @@ import router from './router'
 // 导入自己需要的初始化样式文件css
 import '@/styles/common.scss'
 // 导入懒加载插件
-import {lazyPlugin,componentPlugin} from '@/directives/index'
+import { lazyPlugin, componentPlugin } from '@/directives/index'
 
 const app = createApp(App)
 
