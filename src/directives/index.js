@@ -1,7 +1,7 @@
 // 定义懒加载插件
 import { useIntersectionObserver } from '@vueuse/core'
 import ImgView from '@/components/ImgView/index.vue'
-import Sku from '@/components/xtxSKU/index.vue'
+import XtxSku from '@/components/xtxSKU/index1.vue'
 
 const lazyPlugin = {
   install(app) {
@@ -34,7 +34,7 @@ const componentPlugin = {
   install(app) {
     // app.component('组件名字'，组件配置对象)
     app.component('ImgView', ImgView)
-    app.component('Sku', Sku)
+    app.component('XtxSku', XtxSku)
   }
 }
 

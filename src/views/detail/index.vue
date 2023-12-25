@@ -1,11 +1,11 @@
 <script setup>
 import DetailHot from '@/views/detail/components/detailHot.vue'
-import ImgView from '@/components/ImgView/index.vue'
+// import ImgView from '@/components/ImgView/index.vue'
+// import XtxSku from '@/components/xtxSKU/index1.vue'
 import { getDetail } from '@/apis/detail'
 import { ref } from 'vue'
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router'
-import XtxSku from '@/components/xtxSKU/index1.vue'
 
 const goods = ref({})
 const route = useRoute()
