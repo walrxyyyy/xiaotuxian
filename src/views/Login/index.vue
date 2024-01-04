@@ -4,7 +4,7 @@ import { ref } from 'vue'
 const form = ref({
     account: '',
     password: '',
-    agree: true
+    agree: false
 })
 // 规则数据对象
 const rules = {
@@ -17,7 +17,15 @@ const rules = {
     ],
     agree: [
         {
-
+            // 自定义校验逻辑  勾选就通过 不勾选就不通过  下面两种写法都是正确的
+            validator: (rule, val, callback) => {
+                // return val ? callback() : callback(new Error('请先同意协议'))
+                if (val) {
+                    callback()
+                } else {
+                    callback(new Error('清先同意协议'))
+                }
+            }
         }
     ]
 }
@@ -52,8 +60,8 @@ const rules = {
                             <el-form-item prop="password" label="密码">
                                 <el-input v-model="form.password" />
                             </el-form-item>
-                            <el-form-item label-width="22px">
-                                <el-checkbox size="large">
+                            <el-form-item prop="agree" label-width="22px">
+                                <el-checkbox size="large" v-model="form.agree">
                                     我已同意隐私条款和服务条款
                                 </el-checkbox>
                             </el-form-item>
